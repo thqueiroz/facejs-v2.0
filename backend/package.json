@@ -9,10 +9,14 @@
   },
   "dependencies": {
     "@tensorflow/tfjs-node": "^1.7.4",
+    "@types/cors": "^2.8.6",
+    "@types/multer": "^1.4.3",
     "canvas": "^2.6.1",
+    "cors": "^2.8.5",
     "date-fns": "^2.12.0",
     "express": "^4.17.1",
     "face-api.js": "^0.22.2",
+    "multer": "^1.4.2",
     "uuidv4": "^6.0.7",
     "uuidv5": "^1.0.0"
   },
