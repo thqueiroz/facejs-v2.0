@@ -13,9 +13,10 @@ const faceLandmark68NetJson = path.join(__dirname, '..', '..', 'weights');
 const faceRecognitionNetJson = path.join(__dirname, '..', '..', 'weights');
 
 const REFERENCE_IMAGE = path.join(__dirname, '..', 'assets', 'ref1.png');
-const QUERY_IMAGE = path.join(__dirname, '..', 'assets', 'ref3.jpeg');
+const QUERY_IMAGE = path.join(__dirname, '..', '..', 'image.png');
 
-async function run(): Promise<void> {
+async function run(): Promise<boolean> {
+    let verify = false;
     await faceDetectionNet.loadFromDisk(faceDetectionNetJson);
 
     await faceapi.nets.faceLandmark68Net.loadFromDisk(faceLandmark68NetJson);
@@ -48,6 +49,10 @@ async function run(): Promise<void> {
 
     const queryDrawBoxes = resultsQuery.map(res => {
         const bestMatch = faceMatcher.findBestMatch(res.descriptor);
+        const label = bestMatch._label;
+        if (label !== 'unknown') {
+            verify = true;
+        }
         return new faceapi.draw.DrawBox(res.detection.box, {
             label: bestMatch.toString(),
         });
@@ -56,6 +61,8 @@ async function run(): Promise<void> {
     queryDrawBoxes.forEach(drawBox => drawBox.draw(outQuery));
     saveFile('queryImage.jpg', (outQuery as any).toBuffer('image/jpeg'));
     console.log('done, saved results to out/queryImage.jpg');
+
+    return verify;
 }
 
 export default run;
