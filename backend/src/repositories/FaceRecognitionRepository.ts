@@ -12,7 +12,7 @@ const faceDetectionNetJson = path.join(__dirname, '..', '..', 'weights');
 const faceLandmark68NetJson = path.join(__dirname, '..', '..', 'weights');
 const faceRecognitionNetJson = path.join(__dirname, '..', '..', 'weights');
 
-const REFERENCE_IMAGE = path.join(__dirname, '..', 'assets', 'ref1.png');
+const REFERENCE_IMAGE = path.join(__dirname, '..', 'assets', 'ref3.jpeg');
 const QUERY_IMAGE = path.join(__dirname, '..', '..', 'image.png');
 
 async function run(): Promise<boolean> {
